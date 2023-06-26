@@ -11,7 +11,9 @@ namespace SemesterProject.Database
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=database.db");
+            base.OnConfiguring(optionsBuilder);
+
+            optionsBuilder.UseSqlite($"Filename={Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "hotel.sqlite")}");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

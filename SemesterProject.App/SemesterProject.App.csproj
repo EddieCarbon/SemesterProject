@@ -8,12 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controls\" />
-    <Folder Include="Styles\" />
-    <Folder Include="Pages\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\SemesterProject.Core\SemesterProject.Core.csproj" />
     <ProjectReference Include="..\SemesterProject.Database\SemesterProject.Database.csproj" />
   </ItemGroup>

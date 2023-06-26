@@ -1,8 +1,7 @@
-﻿using SemesterProject.Helpers;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace SemesterProject
+namespace SemesterProject.App
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
