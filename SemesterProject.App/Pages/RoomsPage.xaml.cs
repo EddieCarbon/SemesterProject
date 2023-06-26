@@ -1,18 +1,13 @@
 ﻿using SemesterProject.Database;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
+
+using SemesterProject.Core;
+using System.Net;
+using System.Xml.Linq;
 
 namespace SemesterProject.App.Pages
 {
@@ -21,7 +16,7 @@ namespace SemesterProject.App.Pages
     /// </summary>
     public partial class RoomsPage : Page
     {
-        public List<User> DatabaseUsers { get; private set; }
+        public List<Room> RoomsList { get; set; }
 
         public RoomsPage()
         {
@@ -30,42 +25,67 @@ namespace SemesterProject.App.Pages
 
         public void Create()
         {
-            using (DataContext context = new DataContext())
+            using (HotelDbContext context = new HotelDbContext())
             {
-                var name = NameTextBox.Text;
-                var address = AddressTextBox.Text;
+                var number = NumberTextBox.Text;
+                var capacity = CapacityTextBox.Text;
+                var beds = BedsTextBox.Text;
+                var cost = CostTextBox.Text;
+                var description = DescriptionTextBox.Text;
 
-                if (name != null && address != null)
+                if (string.IsNullOrWhiteSpace(number) || string.IsNullOrWhiteSpace(capacity) || string.IsNullOrWhiteSpace(beds) || string.IsNullOrWhiteSpace(cost) || string.IsNullOrWhiteSpace(description))
                 {
-                    context.Users.Add(new User() { Name = name, Address = address });
+                    MessageBox.Show("Please fill all fields.");
+                    return;
+                }
+                else
+                {
+                    var room = new Room()
+                    {
+                        RoomNumber = int.Parse(number),
+                        Capacity = int.Parse(capacity),
+                        NumberOfBeds = int.Parse(beds),
+                        Cost = int.Parse(cost),
+                        Description = description
+                    };
+                    context.Rooms.Add(room);
                     context.SaveChanges();
+
+
+                    MessageBox.Show("Room created successfully.");
                 }
             }
         }
 
         public void Read()
         {
-            using (DataContext context = new DataContext())
+            using (HotelDbContext context = new HotelDbContext())
             {
-                DatabaseUsers = context.Users.ToList();
-                ItemList.ItemsSource = DatabaseUsers;
+                RoomsList = context.Rooms.ToList();
+                ItemList.ItemsSource = RoomsList;
             }
         }
 
         public void Update()
         {
-            using (DataContext context = new DataContext())
+            using (HotelDbContext context = new())
             {
-                User selectedUser = ItemList.SelectedItem as User;
+                Room selectedRoom = ItemList.SelectedItem as Room;
 
-                var name = NameTextBox.Text;
-                var address = AddressTextBox.Text;
+                var number = NumberTextBox.Text;
+                var capacity = CapacityTextBox.Text;
+                var beds = BedsTextBox.Text;
+                var cost = CostTextBox.Text;
+                var description = DescriptionTextBox.Text;
 
-                if (name != null && address != null)
+                if (selectedRoom != null)
                 {
-                    User user = context.Users.Find(selectedUser.Id);
-                    user.Name = name;
-                    user.Address = address;
+                    Room room = context.Rooms.Find(selectedRoom.ID);
+                    room.RoomNumber = int.Parse(number);
+                    room.Capacity = int.Parse(capacity);
+                    room.NumberOfBeds = int.Parse(beds);
+                    room.Cost = int.Parse(cost);
+                    room.Description = description;
 
                     context.SaveChanges();
                 }
@@ -74,15 +94,15 @@ namespace SemesterProject.App.Pages
 
         public void Delete()
         {
-            using (DataContext context = new DataContext())
+            using (HotelDbContext context = new HotelDbContext())
             {
-                User selectedUser = ItemList.SelectedItem as User;
+                Room selectedRoom = ItemList.SelectedItem as Room;
 
-                if (selectedUser != null)
+                if (selectedRoom != null)
                 {
-                    User user = context.Users.Single(x => x.Id == selectedUser.Id);
+                    Room room = context.Rooms.Single(x => x.ID == selectedRoom.ID);
 
-                    context.Remove(user);
+                    context.Remove(room);
                     context.SaveChanges();
                 }
             }
@@ -102,15 +122,9 @@ namespace SemesterProject.App.Pages
         {
             Update();
         }
-
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             Delete();
-        }
-
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            ItemList.Items.Clear();
         }
     }
 }

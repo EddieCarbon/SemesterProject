@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace SemesterProject.Database
 {
@@ -32,11 +33,20 @@ namespace SemesterProject.Database
                 .HasOne(r => r.Room)
                 .WithMany()
                 .HasForeignKey(r => r.RoomID);
+
+            modelBuilder.Entity<Room>()
+                .HasIndex(r => r.RoomNumber)
+                .IsUnique();
+
+            modelBuilder.Entity<User>()
+                .HasIndex(r => r.PhoneNumber)
+                .IsUnique();
         }
     }
 
     public class Address
     {
+        [Key]
         public int ID { get; set; }
         public string Street { get; set; }
         public int ApartmentNumber { get; set; }
@@ -47,6 +57,7 @@ namespace SemesterProject.Database
 
     public class User
     {
+        [Key]
         public int ID { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
@@ -59,6 +70,7 @@ namespace SemesterProject.Database
 
     public class Reservation
     {
+        [Key]
         public int ID { get; set; }
         public int UserID { get; set; }
         public int RoomID { get; set; }
@@ -70,6 +82,7 @@ namespace SemesterProject.Database
 
     public class Room
     {
+        [Key]
         public int ID { get; set; }
         public int RoomNumber { get; set; }
         public int Capacity { get; set; }
