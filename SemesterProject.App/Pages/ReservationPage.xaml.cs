@@ -30,9 +30,6 @@ namespace SemesterProject.App.Pages
                 var roomid = RoomIDTextBox.Text;
                 var startDate = StartDateTextBox.Text;
                 var endDate = EndDateTextBox.Text;
-                var totalDays = GetDays(startDate, endDate);
-                var price = GetTotalCost(roomid, totalDays);
-  
 
                 if (string.IsNullOrEmpty(userid) || string.IsNullOrEmpty(roomid) || string.IsNullOrEmpty(startDate) || string.IsNullOrEmpty(endDate))
                 {
@@ -41,6 +38,9 @@ namespace SemesterProject.App.Pages
                 }
                 else
                 {
+                    var totalDays = GetDays(startDate, endDate);
+                    var price = GetTotalCost(roomid, totalDays);
+
                     var reservation = new Reservation()
                     {
                         UserID = int.Parse(userid),
@@ -48,7 +48,7 @@ namespace SemesterProject.App.Pages
                         StartDate = DateTime.ParseExact(startDate, "dd.MM.yyyy", CultureInfo.InvariantCulture),
                         EndDate = DateTime.ParseExact(endDate, "dd.MM.yyyy", CultureInfo.InvariantCulture),
                         Days = totalDays,
-                        TotalCost = price * totalDays
+                        TotalCost = price
                     };
 
                     context.Reservations.Add(reservation);
@@ -65,6 +65,22 @@ namespace SemesterProject.App.Pages
             {
                 Reservations = context.Reservations.ToList();
                 ItemList.ItemsSource = Reservations;
+            }
+        }
+
+        public void Update()
+        {
+            using (HotelDbContext context = new ())
+            {
+                // TODO: Update
+            }
+        }
+
+        public void Delete()
+        {
+            using (HotelDbContext context = new ())
+            {
+                // TODO: Delete
             }
         }
 
@@ -107,7 +123,6 @@ namespace SemesterProject.App.Pages
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             //Delete();
-            Read();
         }
     }
 }
