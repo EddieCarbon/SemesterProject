@@ -63,7 +63,8 @@ namespace SemesterProject.App.Pages
                     Capacity = int.Parse(capacity),
                     NumberOfBeds = int.Parse(beds),
                     Cost = float.Parse(cost),
-                    Description = description
+                    Description = description,
+                    HotelID = int.Parse(hotelid)
                 };
                 
                 context.Rooms.Add(room);
