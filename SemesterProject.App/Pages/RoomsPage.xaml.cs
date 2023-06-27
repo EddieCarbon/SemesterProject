@@ -1,4 +1,5 @@
 ﻿using SemesterProject.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
@@ -16,6 +17,7 @@ namespace SemesterProject.App.Pages
         public RoomsPage()
         {
             InitializeComponent();
+            Read();
         }
 
         public void Create()
@@ -28,27 +30,34 @@ namespace SemesterProject.App.Pages
                 var cost = CostTextBox.Text;
                 var description = DescriptionTextBox.Text;
 
-                if (string.IsNullOrWhiteSpace(number) || string.IsNullOrWhiteSpace(capacity) || string.IsNullOrWhiteSpace(beds) || string.IsNullOrWhiteSpace(cost) || string.IsNullOrWhiteSpace(description))
+                if (number != null && capacity != null && beds != null && cost != null && description != null)
                 {
                     MessageBox.Show("Please fill all fields.");
                     return;
                 }
-                else
+
+                foreach (var row in context.Rooms)
                 {
-                    var room = new Room()
+                    if (row.RoomNumber == int.Parse(number))
                     {
-                        RoomNumber = int.Parse(number),
-                        Capacity = int.Parse(capacity),
-                        NumberOfBeds = int.Parse(beds),
-                        Cost = int.Parse(cost),
-                        Description = description
-                    };
-                    context.Rooms.Add(room);
-                    context.SaveChanges();
-
-
-                    MessageBox.Show("Room created successfully.");
+                        MessageBox.Show("Room with this number already exists.");
+                        return;
+                    }
                 }
+
+                var room = new Room()
+                {
+                    RoomNumber = int.Parse(number),
+                    Capacity = int.Parse(capacity),
+                    NumberOfBeds = int.Parse(beds),
+                    Cost = float.Parse(cost),
+                    Description = description
+                };
+                
+                context.Rooms.Add(room);
+                context.SaveChanges();
+                
+                MessageBox.Show("Room created successfully.");
             }
         }
 
@@ -60,7 +69,6 @@ namespace SemesterProject.App.Pages
                 ItemList.ItemsSource = RoomsList;
             }
         }
-
         public void Update()
         {
             using (HotelDbContext context = new())
@@ -75,14 +83,35 @@ namespace SemesterProject.App.Pages
 
                 if (selectedRoom != null)
                 {
+                    if (selectedRoom.RoomNumber != int.Parse(number))
+                    {
+                        foreach (var room in context.Rooms)
+                        {
+                            if (room.RoomNumber == int.Parse(number))
+                            {
+                                MessageBox.Show("Room with this number already exists.");
+                                return;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please select room.");
+                    return;
+                }
+
+                if (selectedRoom != null)
+                {
                     Room room = context.Rooms.Find(selectedRoom.ID);
                     room.RoomNumber = int.Parse(number);
                     room.Capacity = int.Parse(capacity);
                     room.NumberOfBeds = int.Parse(beds);
-                    room.Cost = int.Parse(cost);
+                    room.Cost = float.Parse(cost);
                     room.Description = description;
 
                     context.SaveChanges();
+                    MessageBox.Show("Room update successfully.");
                 }
             }
         }
@@ -99,6 +128,11 @@ namespace SemesterProject.App.Pages
 
                     context.Remove(room);
                     context.SaveChanges();
+                }
+                else
+                {
+                    MessageBox.Show("Please select room.");
+                    return;
                 }
             }
         }

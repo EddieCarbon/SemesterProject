@@ -46,7 +46,7 @@ namespace SemesterProject.Database
         public string Name { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
         public string Street { get; set; }
         public int ApartmentNumber { get; set; }
         public string City { get; set; }
@@ -61,6 +61,9 @@ namespace SemesterProject.Database
         public int UserID { get; set; }
         public int RoomID { get; set; }
         public int Days { get; set; }
+        public int TotalCost { get; set; }  
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
 
         public User User { get; set; }
         public Room Room { get; set; }
@@ -73,8 +76,8 @@ namespace SemesterProject.Database
         public int RoomNumber { get; set; }
         public int Capacity { get; set; }
         public int NumberOfBeds { get; set; }
+        public float Cost { get; set; }
         public string Description { get; set; }
-        public int Cost { get; set; }
     }
 }
 

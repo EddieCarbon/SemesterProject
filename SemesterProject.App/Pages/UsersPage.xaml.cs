@@ -44,7 +44,7 @@ namespace SemesterProject.App.Pages
                     Name = name,
                     LastName = lastname,
                     Email = email,
-                    PhoneNumber = int.Parse(phone),
+                    PhoneNumber = phone,
                     Street = street,
                     ApartmentNumber = int.Parse(apartmentNumber),
                     City = city,
@@ -92,7 +92,7 @@ namespace SemesterProject.App.Pages
                     user.Name = name;
                     user.LastName = lastname;
                     user.Email = email;
-                    user.PhoneNumber = int.Parse(phone);
+                    user.PhoneNumber = phone;
                     user.Street = street;
                     user.ApartmentNumber = int.Parse(apartmentNumber);
                     user.City = city;
