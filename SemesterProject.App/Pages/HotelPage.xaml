@@ -24,13 +24,13 @@
             </ListView.ContextMenu>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Id" Width="30"  DisplayMemberBinding="{Binding ID}"/>
-                    <GridViewColumn Header="Number" Width="60" DisplayMemberBinding="{Binding RoomNumber}"/>
-                    <GridViewColumn Header="Capacity" Width="60" DisplayMemberBinding="{Binding Capacity}"/>
-                    <GridViewColumn Header="Beds" Width="70" DisplayMemberBinding="{Binding NumberOfBeds}"/>
-                    <GridViewColumn Header="Cost" Width="60" DisplayMemberBinding="{Binding Cost}"/>
-                    <GridViewColumn Header="IdHotel" Width="60" DisplayMemberBinding="{Binding HotelID}"/>
-                    <GridViewColumn Header="Description" Width="470" DisplayMemberBinding="{Binding Description}"/>
+                    <GridViewColumn Header="Id" Width="40"  DisplayMemberBinding="{Binding ID}"/>
+                    <GridViewColumn Header="Name" Width="90" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="IsPool" Width="70" DisplayMemberBinding="{Binding IsPool}"/>
+                    <GridViewColumn Header="IsRestaurant" Width="70" DisplayMemberBinding="{Binding IsRestaurant}"/>
+                    <GridViewColumn Header="IsBar" Width="70" DisplayMemberBinding="{Binding IsBar}"/>
+                    <GridViewColumn Header="IsGym" Width="70" DisplayMemberBinding="{Binding IsGym}"/>
+                    <GridViewColumn Header="IsSpa" Width="70" DisplayMemberBinding="{Binding IsSpa}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -40,7 +40,7 @@
         <Grid x:Name="EditGrid" IsEnabled="{Binding ElementName=EnableCheckBox,Path=IsChecked}" Margin="3,250,0,0"  HorizontalAlignment="Stretch" VerticalAlignment="Top">
             <Label Content="Name" HorizontalAlignment="Left" Margin="3,0,0,0"   VerticalAlignment="Top"/>
 
-            <TextBox Name="NameTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.RoomNumber,Mode=OneWay}" HorizontalAlignment="Left"  Margin="70,0,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
+            <TextBox Name="NameTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.Name,Mode=OneWay}" HorizontalAlignment="Left"  Margin="70,0,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
         </Grid>
         <StackPanel Margin="20, 280">
             <Label FontWeight="Bold">Hotel Options</Label>
