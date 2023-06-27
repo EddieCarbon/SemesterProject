@@ -28,9 +28,12 @@ namespace SemesterProject.App.Pages
                 var capacity = CapacityTextBox.Text;
                 var beds = BedsTextBox.Text;
                 var cost = CostTextBox.Text;
+                var hotelid = HotelIDTextBox.Text;
                 var description = DescriptionTextBox.Text;
 
-                if (number != null && capacity != null && beds != null && cost != null && description != null)
+                if (string.IsNullOrEmpty(number) && string.IsNullOrEmpty(capacity) && 
+                    string.IsNullOrEmpty(beds) && string.IsNullOrEmpty(cost) &&
+                    string.IsNullOrEmpty(hotelid) && string.IsNullOrEmpty(description))
                 {
                     MessageBox.Show("Please fill all fields.");
                     return;
@@ -43,6 +46,15 @@ namespace SemesterProject.App.Pages
                         MessageBox.Show("Room with this number already exists.");
                         return;
                     }
+                }
+
+                // Check Hotel exists
+                var hotel = context.Hotels.FirstOrDefault(h => h.ID == int.Parse(hotelid));
+                
+                if (hotel == null) 
+                {
+                    MessageBox.Show("Hotel with this ID does not exist.");
+                    return;
                 }
 
                 var room = new Room()
@@ -79,6 +91,7 @@ namespace SemesterProject.App.Pages
                 var capacity = CapacityTextBox.Text;
                 var beds = BedsTextBox.Text;
                 var cost = CostTextBox.Text;
+                var hotelid = HotelIDTextBox.Text;
                 var description = DescriptionTextBox.Text;
 
                 if (selectedRoom != null)
@@ -101,6 +114,15 @@ namespace SemesterProject.App.Pages
                     return;
                 }
 
+                // Check Hotel exists
+                var hotel = context.Hotels.FirstOrDefault(h => h.ID == int.Parse(hotelid));
+
+                if (hotel == null)
+                {
+                    MessageBox.Show("Hotel with this ID does not exist.");
+                    return;
+                }
+
                 if (selectedRoom != null)
                 {
                     Room room = context.Rooms.Find(selectedRoom.ID);
@@ -108,6 +130,7 @@ namespace SemesterProject.App.Pages
                     room.Capacity = int.Parse(capacity);
                     room.NumberOfBeds = int.Parse(beds);
                     room.Cost = float.Parse(cost);
+                    room.HotelID = int.Parse(hotelid);
                     room.Description = description;
 
                     context.SaveChanges();

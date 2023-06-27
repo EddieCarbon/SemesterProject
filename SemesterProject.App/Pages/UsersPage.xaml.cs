@@ -17,11 +17,12 @@ namespace SemesterProject.App.Pages
         public UsersPage()
         {
             InitializeComponent();
+            Read();
         }
 
         public void Create()
         {
-            using (HotelDbContext context = new ())
+            using (HotelDbContext context = new HotelDbContext())
             {
                 var name = NameTextBox.Text;
                 var lastname = LastNameTextBox.Text;
@@ -33,29 +34,31 @@ namespace SemesterProject.App.Pages
                 var postalCode = PostalCodeTextBox.Text;
                 var country = CountryTextBox.Text;
 
-                if (!string.IsNullOrEmpty(name) && string.IsNullOrEmpty(lastname))
+                if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(lastname) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(phone))
                 {
                     MessageBox.Show("Please fill all fields.");
                     return;
                 }
-                
-                var user = new User()
+                else
                 {
-                    Name = name,
-                    LastName = lastname,
-                    Email = email,
-                    PhoneNumber = phone,
-                    Street = street,
-                    ApartmentNumber = int.Parse(apartmentNumber),
-                    City = city,
-                    PostalCode = postalCode,
-                    Country = country,
-                };
+                    var user = new User()
+                    {
+                        Name = name,
+                        LastName = lastname,
+                        Email = email,
+                        PhoneNumber = phone,
+                        Street = street,
+                        ApartmentNumber = int.Parse(apartmentNumber),
+                        City = city,
+                        PostalCode = postalCode,
+                        Country = country,
+                    };
 
-                context.Users.Add(user);
-                context.SaveChanges();
+                    context.Users.Add(user);
+                    context.SaveChanges();
 
-                MessageBox.Show("User created successfully.");
+                    MessageBox.Show("User created successfully.");
+                }
             }
         }
 
@@ -88,7 +91,6 @@ namespace SemesterProject.App.Pages
                 {
                     User user = context.Users.Find(selectedUser.ID);
                     
-
                     user.Name = name;
                     user.LastName = lastname;
                     user.Email = email;
@@ -100,6 +102,11 @@ namespace SemesterProject.App.Pages
                     user.Country = country;
 
                     context.SaveChanges();
+                }
+                else
+                {
+                    MessageBox.Show("Please select row.");
+                    return;
                 }
             }
         }
@@ -116,6 +123,11 @@ namespace SemesterProject.App.Pages
                     
                     context.Remove(user);
                     context.SaveChanges();
+                }
+                else
+                {
+                    MessageBox.Show("Please select row.");
+                    return;
                 }
             }
         }
