@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SemesterProject.Database
 {
     public class HotelDbContext : DbContext
     {
-        public DbSet<Address> Addresses { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Room> Rooms { get; set; }
@@ -19,11 +19,6 @@ namespace SemesterProject.Database
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>()
-                .HasOne(u => u.Address)
-                .WithMany()
-                .HasForeignKey(u => u.AddressID);
-
             modelBuilder.Entity<Reservation>()
                 .HasOne(r => r.User)
                 .WithMany()
@@ -44,17 +39,6 @@ namespace SemesterProject.Database
         }
     }
 
-    public class Address
-    {
-        [Key]
-        public int ID { get; set; }
-        public string Street { get; set; }
-        public int ApartmentNumber { get; set; }
-        public string City { get; set; }
-        public string PostalCode { get; set; }
-        public string Country { get; set; }
-    }
-
     public class User
     {
         [Key]
@@ -63,9 +47,11 @@ namespace SemesterProject.Database
         public string LastName { get; set; }
         public string Email { get; set; }
         public int PhoneNumber { get; set; }
-        public int AddressID { get; set; }
-
-        public Address Address { get; set; }
+        public string Street { get; set; }
+        public int ApartmentNumber { get; set; }
+        public string City { get; set; }
+        public string PostalCode { get; set; }
+        public string Country { get; set; }
     }
 
     public class Reservation

@@ -4,11 +4,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-
-using SemesterProject.Core;
-using System.Net;
-using System.Xml.Linq;
-
 namespace SemesterProject.App.Pages
 {
     /// <summary>
