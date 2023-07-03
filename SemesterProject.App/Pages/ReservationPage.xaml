@@ -43,10 +43,10 @@
             <Label Content="StartDate" HorizontalAlignment="Left" Margin="230,0,0,0" VerticalAlignment="Top"/>
             <Label Content="EndDate" HorizontalAlignment="Left" Margin="230,40,0,0" VerticalAlignment="Top"/>
 
-            <TextBox Name="UserIDTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.Name,Mode=OneWay}" HorizontalAlignment="Left"  Margin="70,0,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
-            <TextBox Name="RoomIDTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.LastName,Mode=OneWay}" HorizontalAlignment="Left" Margin="70,40,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
-            <DatePicker Name="StartDateTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.Email,Mode=OneWay}" Height="25" HorizontalAlignment="Left" Margin="300,0,0,0"  VerticalAlignment="Top" Width="115" />
-            <DatePicker Name="EndDateTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.Email,Mode=OneWay}" Height="25" HorizontalAlignment="Left" Margin="300,40,0,0"  VerticalAlignment="Top" Width="115" />
+            <TextBox Name="UserIDTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.UserID,Mode=OneWay}" HorizontalAlignment="Left"  Margin="70,0,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
+            <TextBox Name="RoomIDTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.RoomID,Mode=OneWay}" HorizontalAlignment="Left" Margin="70,40,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
+            <DatePicker Name="StartDateTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.StartDate,Mode=OneWay}" Height="25" HorizontalAlignment="Left" Margin="300,0,0,0"  VerticalAlignment="Top" Width="115" />
+            <DatePicker Name="EndDateTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.EndDate,Mode=OneWay}" Height="25" HorizontalAlignment="Left" Margin="300,40,0,0"  VerticalAlignment="Top" Width="115" />
         </Grid>
 
         <Button x:Name="CreateButton" HorizontalAlignment="Left"  Margin="10,400,0,0" VerticalAlignment="Top"  Click="CreateButton_Click">

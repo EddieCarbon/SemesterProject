@@ -40,21 +40,42 @@ namespace SemesterProject.App.Pages
                 {
                     var totalDays = GetDays(startDate, endDate);
                     var price = GetTotalCost(roomid, totalDays);
+                    var isUserExist = IsUserExist(userid);
+                    var isDateValid = IsDateValid(startDate, endDate);
 
                     var reservation = new Reservation()
                     {
                         UserID = int.Parse(userid),
                         RoomID = int.Parse(roomid),
-                        StartDate = DateTime.ParseExact(startDate, "dd.MM.yyyy", CultureInfo.InvariantCulture),
-                        EndDate = DateTime.ParseExact(endDate, "dd.MM.yyyy", CultureInfo.InvariantCulture),
+                        StartDate = DateTime.ParseExact(startDate, "MM.dd.yyyy", CultureInfo.InvariantCulture),
+                        EndDate = DateTime.ParseExact(endDate, "MM.dd.yyyy", CultureInfo.InvariantCulture),
                         Days = totalDays,
                         TotalCost = price
                     };
 
-                    context.Reservations.Add(reservation);
-                    context.SaveChanges();
+                    if (price == 0)
+                    {
+                        MessageBox.Show("Room not found.");
+                        return;
+                    }
+                    else if (!isUserExist)
+                    {
+                        MessageBox.Show("User not found.");
+                        return;
+                    }
+                    else if (!isDateValid)
+                    {
+                        MessageBox.Show("Invalid date.");
+                        return;
+                    } 
 
-                    MessageBox.Show("User created successfully.");
+                    if (price != 0 && isUserExist && isDateValid)
+                    {
+                        context.Reservations.Add(reservation);
+                        context.SaveChanges();
+
+                        MessageBox.Show("User created successfully.");
+                    }
                 }
             }
         }
@@ -73,6 +94,56 @@ namespace SemesterProject.App.Pages
             using (HotelDbContext context = new ())
             {
                 // TODO: Update
+                Reservation selectedRow = ItemList.SelectedItem as Reservation;
+
+                if (selectedRow == null)
+                {
+                    MessageBox.Show("Please select a reservation.");
+                    return;
+                }
+
+                var userid = UserIDTextBox.Text;
+                var roomid = RoomIDTextBox.Text;
+                var startDate = StartDateTextBox.Text;
+                var endDate = EndDateTextBox.Text;
+
+                if (string.IsNullOrEmpty(userid) || string.IsNullOrEmpty(roomid) || string.IsNullOrEmpty(startDate) || string.IsNullOrEmpty(endDate))
+                {
+                    MessageBox.Show("Please fill all fields.");
+                    return;
+                }
+                else
+                {
+                    var totalDays = GetDays(startDate, endDate);
+                    var price = GetTotalCost(roomid, totalDays);
+                    var isUserExist = IsUserExist(userid);
+                    var isDateValid = IsDateValid(startDate, endDate);
+
+                    Reservation reservation = context.Reservations.Where(r
+                        => r.ID == selectedRow.ID).FirstOrDefault();
+                    
+
+                    if (price == 0)
+                    {
+                        MessageBox.Show("Room not found.");
+                        return;
+                    }
+                    else if (!isUserExist)
+                    {
+                        MessageBox.Show("User not found.");
+                        return;
+                    }
+                    else if (!isDateValid)
+                    {
+                        MessageBox.Show("Invalid date.");
+                        return;
+                    }
+                    if (price != 0 && isUserExist && isDateValid)
+                    {
+                        
+                    }
+                }   
+
             }
         }
 
@@ -80,7 +151,18 @@ namespace SemesterProject.App.Pages
         {
             using (HotelDbContext context = new ())
             {
-                // TODO: Delete
+                Reservation selectedId = ItemList.SelectedItem as Reservation;
+                
+                if (selectedId == null)
+                {
+                    MessageBox.Show("Please select a reservation.");
+                    return;
+                }
+
+                context.Reservations.Remove(selectedId);
+                context.SaveChanges();
+
+                MessageBox.Show("Reservation deleted successfully.");
             }
         }
 
@@ -99,12 +181,40 @@ namespace SemesterProject.App.Pages
             {
                 var id = int.Parse(roomid);
                 var room = context.Rooms.Where(r => r.ID == id).FirstOrDefault();
+                if (room == null)
+                {
+                    return 0;
+                }
                 var price = room.Cost;
                 var totalCost = price * totalDays;
                 return totalCost;
             }
         }
 
+        public bool IsUserExist(string userid)
+        {
+            using (HotelDbContext context = new ())
+            {
+                var id = int.Parse(userid);
+                var user = context.Users.Where(u => u.ID == id).FirstOrDefault();
+                if (user == null)
+                {
+                    return false;
+                }
+                return true;
+            }
+        }
+
+        public bool IsDateValid(string startDate, string endDate)
+        {
+            DateTime start = DateTime.ParseExact(startDate, "dd.MM.yyyy", CultureInfo.InvariantCulture);
+            DateTime end = DateTime.ParseExact(endDate, "dd.MM.yyyy", CultureInfo.InvariantCulture);
+            if (start > end)
+            {
+                return false;
+            }
+            return true;
+        }
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
@@ -118,11 +228,12 @@ namespace SemesterProject.App.Pages
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-            //Update();
+            Update();
         }
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            //Delete();
+            Delete();
+            Read();
         }
     }
 }
