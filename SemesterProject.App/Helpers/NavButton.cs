@@ -27,8 +27,7 @@ namespace SemesterProject
             get { return (Geometry)GetValue(IconProperty); }
             set { SetValue(IconProperty, value); }
         }
+
         public static readonly DependencyProperty IconProperty = DependencyProperty.Register("Icon", typeof(Geometry), typeof(NavButton), new PropertyMetadata(null));
-
-
     }
 }

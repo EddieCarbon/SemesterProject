@@ -1,5 +1,4 @@
 ﻿using SemesterProject.Database;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -162,6 +161,7 @@ namespace SemesterProject.App.Pages
                 }
             }
         }
+
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
