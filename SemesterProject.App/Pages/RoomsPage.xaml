@@ -45,11 +45,11 @@
             <Label Content="HotelID" HorizontalAlignment="Left" Margin="250,40,0,0" VerticalAlignment="Top"/>
             <Label Content="Description" HorizontalAlignment="Left" Margin="250,80,0,0" VerticalAlignment="Top"/>
 
-            <TextBox Name="NumberTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.RoomNumber,Mode=OneWay}" HorizontalAlignment="Left"  Margin="70,0,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
-            <TextBox Name="CapacityTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.Capacity,Mode=OneWay}" HorizontalAlignment="Left" Margin="70,40,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
-            <TextBox Name="BedsTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.NumberOfBeds,Mode=OneWay}" HorizontalAlignment="Left" Margin="70,80,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
-            <TextBox Name="CostTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.Cost,Mode=OneWay}" HorizontalAlignment="Left" Margin="325,0,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
-            <TextBox Name="HotelIDTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.HotelID,Mode=OneWay}" HorizontalAlignment="Left" Margin="325,40,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
+            <TextBox Name="NumberTextBox" PreviewTextInput="NumberValidationTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.RoomNumber,Mode=OneWay}" HorizontalAlignment="Left"  Margin="70,0,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
+            <TextBox Name="CapacityTextBox" PreviewTextInput="NumberValidationTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.Capacity,Mode=OneWay}" HorizontalAlignment="Left" Margin="70,40,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
+            <TextBox Name="BedsTextBox" PreviewTextInput="NumberValidationTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.NumberOfBeds,Mode=OneWay}" HorizontalAlignment="Left" Margin="70,80,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
+            <TextBox Name="CostTextBox" PreviewTextInput="NumberValidationTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.Cost,Mode=OneWay}" HorizontalAlignment="Left" Margin="325,0,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
+            <TextBox Name="HotelIDTextBox" PreviewTextInput="NumberValidationTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.HotelID,Mode=OneWay}" HorizontalAlignment="Left" Margin="325,40,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
             <TextBox Name="DescriptionTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.Description,Mode=OneWay}" HorizontalAlignment="Left" Margin="325,80,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
 
         </Grid>

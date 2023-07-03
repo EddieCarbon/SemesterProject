@@ -3,10 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
-namespace SemesterProject.App.Pages
+namespace SemesterProject.App
 {
     /// <summary>
     /// Interaction logic for ReservationPage.xaml
@@ -197,6 +199,12 @@ namespace SemesterProject.App.Pages
                 var totalCost = price * totalDays;
                 return totalCost;
             }
+        }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
 
         public bool IsUserExist(string userid)

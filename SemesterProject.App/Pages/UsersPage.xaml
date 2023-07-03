@@ -1,4 +1,4 @@
-﻿<Page x:Class="SemesterProject.App.Pages.UsersPage"
+﻿<Page x:Class="SemesterProject.App.UsersPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -57,11 +57,10 @@
             <TextBox Name="EmailTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.Email,Mode=OneWay}" HorizontalAlignment="Left" Margin="70,80,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
             <TextBox Name="PhoneTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.PhoneNumber,Mode=OneWay}" HorizontalAlignment="Left" Margin="325,0,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
             <TextBox Name="StreetTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.Street,Mode=OneWay}" HorizontalAlignment="Left" Margin="325,40,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
-            <TextBox Name="ApartmentNumberTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.ApartmentNumber,Mode=OneWay}" HorizontalAlignment="Left" Margin="325,80,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
+            <TextBox Name="ApartmentNumberTextBox" PreviewTextInput="NumberValidationTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.ApartmentNumber,Mode=OneWay}" HorizontalAlignment="Left" Margin="325,80,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
             <TextBox Name="CityTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.City,Mode=OneWay}" HorizontalAlignment="Left" Margin="560,0,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
             <TextBox Name="PostalCodeTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.PostalCode,Mode=OneWay}" HorizontalAlignment="Left" Margin="560,40,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
             <TextBox Name="CountryTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.Country,Mode=OneWay}" HorizontalAlignment="Left" Margin="560,80,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
-
         </Grid>
 
         <Button x:Name="CreateButton" HorizontalAlignment="Left"  Margin="10,400,0,0" VerticalAlignment="Top" Click="CreateButton_Click" >
