@@ -119,8 +119,15 @@ namespace SemesterProject.App.Pages
                     var isUserExist = IsUserExist(userid);
                     var isDateValid = IsDateValid(startDate, endDate);
 
-                    Reservation reservation = context.Reservations.Where(r
-                        => r.ID == selectedRow.ID).FirstOrDefault();
+                    Reservation reservation = context.Reservations.Find(selectedRow.ID);
+                    reservation.UserID = int.Parse(userid);
+                    reservation.RoomID = int.Parse(roomid);
+                    reservation.StartDate = DateTime.ParseExact(startDate, "MM.dd.yyyy", CultureInfo.InvariantCulture);
+                    reservation.EndDate = DateTime.ParseExact(endDate, "MM.dd.yyyy", CultureInfo.InvariantCulture);
+                    reservation.Days = totalDays;
+                    reservation.TotalCost = price;
+
+                    
                     
 
                     if (price == 0)
@@ -140,7 +147,8 @@ namespace SemesterProject.App.Pages
                     }
                     if (price != 0 && isUserExist && isDateValid)
                     {
-                        
+                        context.SaveChanges();
+                        MessageBox.Show("Reservation updated successfully.");
                     }
                 }   
 

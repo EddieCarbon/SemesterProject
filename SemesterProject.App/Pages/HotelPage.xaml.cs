@@ -11,6 +11,7 @@ namespace SemesterProject.App.Pages
     /// </summary>
     public partial class HotelPage : Page
     {
+        
         public List<Hotel> HotelList { get; set; }
         public HotelPage()
         {
@@ -97,9 +98,18 @@ namespace SemesterProject.App.Pages
             using (HotelDbContext context = new())
             {
                 var hotel = ItemList.SelectedItem as Hotel;
-                context.Hotels.Remove(hotel);
-                context.SaveChanges();
-                MessageBox.Show("Hotel deleted successfully.");
+
+                if (hotel == null)
+                {
+                    MessageBox.Show("Please select a hotel.");
+                    return;
+                }
+                else
+                {
+                    context.Hotels.Remove(hotel);
+                    context.SaveChanges();
+                    MessageBox.Show("Hotel deleted successfully.");
+                } 
             }
         }
 

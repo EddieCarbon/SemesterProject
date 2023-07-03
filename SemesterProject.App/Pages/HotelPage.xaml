@@ -44,11 +44,11 @@
         </Grid>
         <StackPanel Margin="20, 280">
             <Label FontWeight="Bold">Hotel Options</Label>
-            <CheckBox x:Name="IsPool">Pool</CheckBox>
-            <CheckBox x:Name="IsRestaurant">Restaurant</CheckBox>
-            <CheckBox x:Name="IsBar">Bar</CheckBox>
-            <CheckBox x:Name="IsGym">Gym</CheckBox>
-            <CheckBox x:Name="IsSpa">Spa</CheckBox>
+            <CheckBox x:Name="IsPool" IsChecked="{Binding ElementName=ItemList, Path=SelectedItem.IsPool,Mode=OneWay}" >Pool</CheckBox>
+            <CheckBox x:Name="IsRestaurant" IsChecked="{Binding ElementName=ItemList, Path=SelectedItem.IsRestaurant,Mode=OneWay}">Restaurant</CheckBox>
+            <CheckBox x:Name="IsBar" IsChecked="{Binding ElementName=ItemList, Path=SelectedItem.IsBar,Mode=OneWay}">Bar</CheckBox>
+            <CheckBox x:Name="IsGym" IsChecked="{Binding ElementName=ItemList, Path=SelectedItem.IsGym,Mode=OneWay}">Gym</CheckBox>
+            <CheckBox x:Name="IsSpa" IsChecked="{Binding ElementName=ItemList, Path=SelectedItem.IsSpa,Mode=OneWay}">Spa</CheckBox>
         </StackPanel>
 
         <Button x:Name="CreateButton" HorizontalAlignment="Left"  Margin="10,400,0,0" VerticalAlignment="Top" Click="CreateButton_Click" >
