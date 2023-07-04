@@ -48,6 +48,8 @@ namespace SemesterProject.App.Pages
                     };
                     context.Hotels.Add(hotel);
                     context.SaveChanges();
+                    Read();
+
                     MessageBox.Show("Hotel created successfully.");
                 }
             }
@@ -88,6 +90,8 @@ namespace SemesterProject.App.Pages
                     hotel.IsSpa = spa;
                     context.Hotels.Update(hotel);
                     context.SaveChanges();
+                    Read();
+
                     MessageBox.Show("Hotel updated successfully.");
                 }
             }
@@ -108,6 +112,8 @@ namespace SemesterProject.App.Pages
                 {
                     context.Hotels.Remove(hotel);
                     context.SaveChanges();
+                    Read();
+
                     MessageBox.Show("Hotel deleted successfully.");
                 } 
             }

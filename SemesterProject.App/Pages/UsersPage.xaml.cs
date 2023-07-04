@@ -57,6 +57,7 @@ namespace SemesterProject.App
 
                     context.Users.Add(user);
                     context.SaveChanges();
+                    Read();
 
                     MessageBox.Show("User created successfully.");
                 }
@@ -103,6 +104,8 @@ namespace SemesterProject.App
                     user.Country = country;
 
                     context.SaveChanges();
+                    Read();
+                    MessageBox.Show("User updated successfully.");
                 }
                 else
                 {
@@ -124,6 +127,8 @@ namespace SemesterProject.App
                     
                     context.Remove(user);
                     context.SaveChanges();
+                    Read();
+                    MessageBox.Show("User deleted successfully.");
                 }
                 else
                 {

@@ -25,12 +25,12 @@ namespace SemesterProject.App.Pages
         {
             using (HotelDbContext context = new HotelDbContext())
             {
-                var number = NumberTextBox.Text;
-                var capacity = CapacityTextBox.Text;
-                var beds = BedsTextBox.Text;
-                var cost = CostTextBox.Text;
-                var hotelid = HotelIDTextBox.Text;
-                var description = DescriptionTextBox.Text;
+                var number = NumberTextBox.Text.Trim();
+                var capacity = CapacityTextBox.Text.Trim();
+                var beds = BedsTextBox.Text.Trim();
+                var cost = CostTextBox.Text.Trim();
+                var hotelid = HotelIDTextBox.Text.Trim();
+                var description = DescriptionTextBox.Text.Trim();
 
                 if (string.IsNullOrEmpty(number) && string.IsNullOrEmpty(capacity) && 
                     string.IsNullOrEmpty(beds) && string.IsNullOrEmpty(cost) &&
@@ -49,7 +49,7 @@ namespace SemesterProject.App.Pages
                     }
                 }
 
-                // Check Hotel exists
+                // Check HotelId exists
                 var hotel = context.Hotels.FirstOrDefault(h => h.ID == int.Parse(hotelid));
                 
                 if (hotel == null) 
@@ -70,6 +70,7 @@ namespace SemesterProject.App.Pages
                 
                 context.Rooms.Add(room);
                 context.SaveChanges();
+                Read();
                 
                 MessageBox.Show("Room created successfully.");
             }
@@ -89,12 +90,12 @@ namespace SemesterProject.App.Pages
             {
                 Room selectedRoom = ItemList.SelectedItem as Room;
 
-                var number = NumberTextBox.Text;
-                var capacity = CapacityTextBox.Text;
-                var beds = BedsTextBox.Text;
-                var cost = CostTextBox.Text;
-                var hotelid = HotelIDTextBox.Text;
-                var description = DescriptionTextBox.Text;
+                var number = NumberTextBox.Text.Trim();
+                var capacity = CapacityTextBox.Text.Trim();
+                var beds = BedsTextBox.Text.Trim();
+                var cost = CostTextBox.Text.Trim();
+                var hotelid = HotelIDTextBox.Text.Trim();
+                var description = DescriptionTextBox.Text.Trim();
 
                 if (selectedRoom != null)
                 {
@@ -136,6 +137,8 @@ namespace SemesterProject.App.Pages
                     room.Description = description;
 
                     context.SaveChanges();
+                    Read();
+
                     MessageBox.Show("Room update successfully.");
                 }
             }
@@ -153,6 +156,9 @@ namespace SemesterProject.App.Pages
 
                     context.Remove(room);
                     context.SaveChanges();
+                    Read();
+
+                    MessageBox.Show("Room deleted successfully.");
                 }
                 else
                 {

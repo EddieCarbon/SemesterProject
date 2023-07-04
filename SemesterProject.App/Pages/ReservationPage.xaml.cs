@@ -75,6 +75,7 @@ namespace SemesterProject.App
                     {
                         context.Reservations.Add(reservation);
                         context.SaveChanges();
+                        Read();
 
                         MessageBox.Show("User created successfully.");
                     }
@@ -95,7 +96,6 @@ namespace SemesterProject.App
         {
             using (HotelDbContext context = new ())
             {
-                // TODO: Update
                 Reservation selectedRow = ItemList.SelectedItem as Reservation;
 
                 if (selectedRow == null)
@@ -129,9 +129,6 @@ namespace SemesterProject.App
                     reservation.Days = totalDays;
                     reservation.TotalCost = price;
 
-                    
-                    
-
                     if (price == 0)
                     {
                         MessageBox.Show("Room not found.");
@@ -150,6 +147,8 @@ namespace SemesterProject.App
                     if (price != 0 && isUserExist && isDateValid)
                     {
                         context.SaveChanges();
+                        Read();
+
                         MessageBox.Show("Reservation updated successfully.");
                     }
                 }   
@@ -171,6 +170,7 @@ namespace SemesterProject.App
 
                 context.Reservations.Remove(selectedId);
                 context.SaveChanges();
+                Read();
 
                 MessageBox.Show("Reservation deleted successfully.");
             }
@@ -236,12 +236,10 @@ namespace SemesterProject.App
         {
             Create();
         }
-
         private void ReadButton_Click(object sender, RoutedEventArgs e)
         {
             Read();
         }
-
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
             Update();
