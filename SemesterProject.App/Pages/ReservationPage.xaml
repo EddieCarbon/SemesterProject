@@ -28,9 +28,9 @@
                     <GridViewColumn Header="UserID" Width="80" DisplayMemberBinding="{Binding UserID}"/>
                     <GridViewColumn Header="RoomID" Width="80" DisplayMemberBinding="{Binding RoomID}"/>
                     <GridViewColumn Header="Days" Width="80" DisplayMemberBinding="{Binding Days}"/>
-                    <GridViewColumn Header="TotalCost" Width="100" DisplayMemberBinding="{Binding TotalCost}"/>
-                    <GridViewColumn Header="StartDate" Width="100" DisplayMemberBinding="{Binding StartDate}"/>
-                    <GridViewColumn Header="EndDate" Width="100" DisplayMemberBinding="{Binding EndDate}"/>
+                    <GridViewColumn Width="100" DisplayMemberBinding="{Binding TotalCost}"/>
+                    <GridViewColumn Header="StartDate" Width="100" DisplayMemberBinding="{Binding StartDate, StringFormat=dd/MM/yy hh:mm}"/>
+                    <GridViewColumn Header="EndDate" Width="100" DisplayMemberBinding="{Binding EndDate, StringFormat=dd/MM/y hh:mm}"/>
                 </GridView>
             </ListView.View>
         </ListView>
@@ -45,8 +45,8 @@
 
             <TextBox Name="UserIDTextBox" PreviewTextInput="NumberValidationTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.UserID,Mode=OneWay}" HorizontalAlignment="Left"  Margin="70,0,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
             <TextBox Name="RoomIDTextBox" PreviewTextInput="NumberValidationTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.RoomID,Mode=OneWay}" HorizontalAlignment="Left" Margin="70,40,0,0" Width="150" Height="26" VerticalAlignment="Top"/>
-            <DatePicker Name="StartDateTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.StartDate,Mode=OneWay}" Height="25" HorizontalAlignment="Left" Margin="300,0,0,0"  VerticalAlignment="Top" Width="115" />
-            <DatePicker Name="EndDateTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.EndDate,Mode=OneWay}" Height="25" HorizontalAlignment="Left" Margin="300,40,0,0"  VerticalAlignment="Top" Width="115" />
+            <DatePicker Name="StartDateTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.StartDate, StringFormat=dd-MMMM-yy hh:mm,Mode=OneWay}" Height="25" HorizontalAlignment="Left" Margin="300,0,0,0"  VerticalAlignment="Top" Width="115" />
+            <DatePicker Name="EndDateTextBox" Text="{Binding ElementName=ItemList ,Path=SelectedItem.EndDate, StringFormat=dd-MMMM-yy hh:mm,Mode=OneWay}" Height="25" HorizontalAlignment="Left" Margin="300,40,0,0"  VerticalAlignment="Top" Width="115" />
         </Grid>
 
         <Button x:Name="CreateButton" HorizontalAlignment="Left"  Margin="10,400,0,0" VerticalAlignment="Top"  Click="CreateButton_Click">

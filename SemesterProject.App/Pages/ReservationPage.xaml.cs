@@ -49,8 +49,8 @@ namespace SemesterProject.App
                     {
                         UserID = int.Parse(userid),
                         RoomID = int.Parse(roomid),
-                        StartDate = DateTime.ParseExact(startDate, "MM.dd.yyyy", CultureInfo.InvariantCulture),
-                        EndDate = DateTime.ParseExact(endDate, "MM.dd.yyyy", CultureInfo.InvariantCulture),
+                        StartDate = DateTime.ParseExact(startDate, "dd.MM.yyyy", CultureInfo.InvariantCulture),
+                        EndDate = DateTime.ParseExact(endDate, "dd.MM.yyyy", CultureInfo.InvariantCulture),
                         Days = totalDays,
                         TotalCost = price
                     };
@@ -124,8 +124,8 @@ namespace SemesterProject.App
                     Reservation reservation = context.Reservations.Find(selectedRow.ID);
                     reservation.UserID = int.Parse(userid);
                     reservation.RoomID = int.Parse(roomid);
-                    reservation.StartDate = DateTime.ParseExact(startDate, "MM.dd.yyyy", CultureInfo.InvariantCulture);
-                    reservation.EndDate = DateTime.ParseExact(endDate, "MM.dd.yyyy", CultureInfo.InvariantCulture);
+                    reservation.StartDate = DateTime.ParseExact(startDate, "dd.MM.yyyy", CultureInfo.InvariantCulture);
+                    reservation.EndDate = DateTime.ParseExact(endDate, "dd.MM.yyyy", CultureInfo.InvariantCulture);
                     reservation.Days = totalDays;
                     reservation.TotalCost = price;
 

@@ -83,8 +83,12 @@ namespace SemesterProject.Database
         public int UserID { get; set; }
         public int RoomID { get; set; }
         public int Days { get; set; }
-        public float TotalCost { get; set; }  
+        public float TotalCost { get; set; }
+
+        [DisplayFormat(DataFormatString = "{dd.MM.yyyy}")]
         public DateTime StartDate { get; set; }
+
+        [DisplayFormat(DataFormatString = "{dd.MM.yyyy}")]
         public DateTime EndDate { get ; set; }
 
         public User User { get; set; }
