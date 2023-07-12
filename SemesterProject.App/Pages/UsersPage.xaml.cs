@@ -21,6 +21,9 @@ namespace SemesterProject.App
             Read();
         }
 
+        /// <summary>
+        /// Creates a new user based on the input from the user interface.
+        /// </summary>
         public void Create()
         {
             using (HotelDbContext context = new HotelDbContext())
@@ -64,18 +67,24 @@ namespace SemesterProject.App
             }
         }
 
+        /// <summary>
+        /// Retrieves the list of users from the database and updates the user interface.
+        /// </summary>
         public void Read()
         {
-            using (HotelDbContext context = new ())
+            using (HotelDbContext context = new HotelDbContext())
             {
                 UsersList = context.Users.ToList();
                 ItemList.ItemsSource = UsersList;
             }
         }
 
+        /// <summary>
+        /// Updates the selected user with the modified information from the user interface.
+        /// </summary>
         public void Update()
         {
-            using (HotelDbContext context = new ())
+            using (HotelDbContext context = new HotelDbContext())
             {
                 User selectedUser = ItemList.SelectedItem as User;
 
@@ -92,7 +101,7 @@ namespace SemesterProject.App
                 if (selectedUser != null)
                 {
                     User user = context.Users.Find(selectedUser.ID);
-                    
+
                     user.Name = name;
                     user.LastName = lastname;
                     user.Email = email;
@@ -109,22 +118,25 @@ namespace SemesterProject.App
                 }
                 else
                 {
-                    MessageBox.Show("Please select row.");
+                    MessageBox.Show("Please select a row.");
                     return;
                 }
             }
         }
 
+        /// <summary>
+        /// Deletes the selected user from the database and updates the user interface.
+        /// </summary>
         public void Delete()
         {
-            using (HotelDbContext context = new ())
+            using (HotelDbContext context = new HotelDbContext())
             {
                 User selectedUser = ItemList.SelectedItem as User;
 
                 if (selectedUser != null)
                 {
                     User user = context.Users.Single(x => x.ID == selectedUser.ID);
-                    
+
                     context.Remove(user);
                     context.SaveChanges();
                     Read();
@@ -132,7 +144,7 @@ namespace SemesterProject.App
                 }
                 else
                 {
-                    MessageBox.Show("Please select row.");
+                    MessageBox.Show("Please select a row.");
                     return;
                 }
             }
@@ -158,6 +170,7 @@ namespace SemesterProject.App
         {
             Update();
         }
+
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             Delete();
