@@ -15,35 +15,43 @@ namespace SemesterProject.Database
         {
             base.OnConfiguring(optionsBuilder);
 
+            // Configures the database connection to use SQLite and specifies the database file path
             optionsBuilder.UseSqlite($"Filename={Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), "hotel.sqlite")}");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+            // Configure the relationships and constraints between entities in the database model
+
+            // Reservation - User relationship
             modelBuilder.Entity<Reservation>()
                 .HasOne(r => r.User)
                 .WithMany()
                 .HasForeignKey(r => r.UserID);
 
+            // Reservation - Room relationship
             modelBuilder.Entity<Reservation>()
                 .HasOne(r => r.Room)
                 .WithMany()
                 .HasForeignKey(r => r.RoomID);
 
+            // Room - Hotel relationship
             modelBuilder.Entity<Room>()
                 .HasOne(r => r.Hotel)
                 .WithMany()
                 .HasForeignKey(r => r.HotelID);
 
+            // Ensure RoomNumber is unique
             modelBuilder.Entity<Room>()
                 .HasIndex(r => r.RoomNumber)
                 .IsUnique();
 
+            // Ensure PhoneNumber is unique for users
             modelBuilder.Entity<User>()
                 .HasIndex(r => r.PhoneNumber)
                 .IsUnique();
-
-           
         }
     }
 
@@ -89,7 +97,7 @@ namespace SemesterProject.Database
         public DateTime StartDate { get; set; }
 
         [DisplayFormat(DataFormatString = "{dd.MM.yyyy}")]
-        public DateTime EndDate { get ; set; }
+        public DateTime EndDate { get; set; }
 
         public User User { get; set; }
         public Room Room { get; set; }
