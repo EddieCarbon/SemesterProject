@@ -23,10 +23,12 @@ namespace SemesterProject.App
             Read();
         }
 
-
+        /// <summary>
+        /// Creates a new reservation based on the input from the user interface.
+        /// </summary>
         public void Create()
         {
-            using (HotelDbContext context = new ())
+            using (HotelDbContext context = new())
             {
                 var userid = UserIDTextBox.Text;
                 var roomid = RoomIDTextBox.Text;
@@ -69,7 +71,7 @@ namespace SemesterProject.App
                     {
                         MessageBox.Show("Invalid date.");
                         return;
-                    } 
+                    }
 
                     if (price != 0 && isUserExist && isDateValid)
                     {
@@ -77,24 +79,30 @@ namespace SemesterProject.App
                         context.SaveChanges();
                         Read();
 
-                        MessageBox.Show("User created successfully.");
+                        MessageBox.Show("Reservation created successfully.");
                     }
                 }
             }
         }
 
+        /// <summary>
+        /// Retrieves the list of reservations from the database and updates the user interface.
+        /// </summary>
         public void Read()
         {
-            using (HotelDbContext context = new ())
+            using (HotelDbContext context = new())
             {
                 Reservations = context.Reservations.ToList();
                 ItemList.ItemsSource = Reservations;
             }
         }
 
+        /// <summary>
+        /// Updates the selected reservation with the modified information from the user interface.
+        /// </summary>
         public void Update()
         {
-            using (HotelDbContext context = new ())
+            using (HotelDbContext context = new())
             {
                 Reservation selectedRow = ItemList.SelectedItem as Reservation;
 
@@ -151,17 +159,19 @@ namespace SemesterProject.App
 
                         MessageBox.Show("Reservation updated successfully.");
                     }
-                }   
-
+                }
             }
         }
 
+        /// <summary>
+        /// Deletes the selected reservation from the database and updates the user interface.
+        /// </summary>
         public void Delete()
         {
-            using (HotelDbContext context = new ())
+            using (HotelDbContext context = new())
             {
                 Reservation selectedId = ItemList.SelectedItem as Reservation;
-                
+
                 if (selectedId == null)
                 {
                     MessageBox.Show("Please select a reservation.");
@@ -176,6 +186,9 @@ namespace SemesterProject.App
             }
         }
 
+        /// <summary>
+        /// Calculates the number of days between the start and end dates.
+        /// </summary>
         public int GetDays(string startDate, string endDate)
         {
             DateTime start = DateTime.ParseExact(startDate, "dd.MM.yyyy", CultureInfo.InvariantCulture);
@@ -185,9 +198,12 @@ namespace SemesterProject.App
             return totalDays;
         }
 
+        /// <summary>
+        /// Calculates the total cost of a room based on its ID and the number of days.
+        /// </summary>
         public float GetTotalCost(string roomid, int totalDays)
         {
-            using (HotelDbContext context = new ())
+            using (HotelDbContext context = new())
             {
                 var id = int.Parse(roomid);
                 var room = context.Rooms.Where(r => r.ID == id).FirstOrDefault();
@@ -201,15 +217,12 @@ namespace SemesterProject.App
             }
         }
 
-        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
-        }
-
+        /// <summary>
+        /// Validates that a given user ID exists in the database.
+        /// </summary>
         public bool IsUserExist(string userid)
         {
-            using (HotelDbContext context = new ())
+            using (HotelDbContext context = new())
             {
                 var id = int.Parse(userid);
                 var user = context.Users.Where(u => u.ID == id).FirstOrDefault();
@@ -221,6 +234,9 @@ namespace SemesterProject.App
             }
         }
 
+        /// <summary>
+        /// Validates that the start date is earlier than or equal to the end date.
+        /// </summary>
         public bool IsDateValid(string startDate, string endDate)
         {
             DateTime start = DateTime.ParseExact(startDate, "dd.MM.yyyy", CultureInfo.InvariantCulture);
@@ -236,14 +252,17 @@ namespace SemesterProject.App
         {
             Create();
         }
+
         private void ReadButton_Click(object sender, RoutedEventArgs e)
         {
             Read();
         }
+
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
             Update();
         }
+
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             Delete();
@@ -251,3 +270,4 @@ namespace SemesterProject.App
         }
     }
 }
+
