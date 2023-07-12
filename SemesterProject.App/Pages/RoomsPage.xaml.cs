@@ -21,6 +21,9 @@ namespace SemesterProject.App.Pages
             Read();
         }
 
+        /// <summary>
+        /// Creates a new room based on the input from the user interface.
+        /// </summary>
         public void Create()
         {
             using (HotelDbContext context = new HotelDbContext())
@@ -32,7 +35,7 @@ namespace SemesterProject.App.Pages
                 var hotelid = HotelIDTextBox.Text.Trim();
                 var description = DescriptionTextBox.Text.Trim();
 
-                if (string.IsNullOrEmpty(number) && string.IsNullOrEmpty(capacity) && 
+                if (string.IsNullOrEmpty(number) && string.IsNullOrEmpty(capacity) &&
                     string.IsNullOrEmpty(beds) && string.IsNullOrEmpty(cost) &&
                     string.IsNullOrEmpty(hotelid) && string.IsNullOrEmpty(description))
                 {
@@ -49,10 +52,10 @@ namespace SemesterProject.App.Pages
                     }
                 }
 
-                // Check HotelId exists
+                // Check if HotelId exists
                 var hotel = context.Hotels.FirstOrDefault(h => h.ID == int.Parse(hotelid));
-                
-                if (hotel == null) 
+
+                if (hotel == null)
                 {
                     MessageBox.Show("Hotel with this ID does not exist.");
                     return;
@@ -67,15 +70,18 @@ namespace SemesterProject.App.Pages
                     Description = description,
                     HotelID = int.Parse(hotelid)
                 };
-                
+
                 context.Rooms.Add(room);
                 context.SaveChanges();
                 Read();
-                
+
                 MessageBox.Show("Room created successfully.");
             }
         }
 
+        /// <summary>
+        /// Retrieves the list of rooms from the database and updates the user interface.
+        /// </summary>
         public void Read()
         {
             using (HotelDbContext context = new HotelDbContext())
@@ -84,9 +90,13 @@ namespace SemesterProject.App.Pages
                 ItemList.ItemsSource = RoomsList;
             }
         }
+
+        /// <summary>
+        /// Updates the selected room with the modified information from the user interface.
+        /// </summary>
         public void Update()
         {
-            using (HotelDbContext context = new())
+            using (HotelDbContext context = new HotelDbContext())
             {
                 Room selectedRoom = ItemList.SelectedItem as Room;
 
@@ -113,11 +123,11 @@ namespace SemesterProject.App.Pages
                 }
                 else
                 {
-                    MessageBox.Show("Please select room.");
+                    MessageBox.Show("Please select a room.");
                     return;
                 }
 
-                // Check Hotel exists
+                // Check if Hotel exists
                 var hotel = context.Hotels.FirstOrDefault(h => h.ID == int.Parse(hotelid));
 
                 if (hotel == null)
@@ -139,11 +149,14 @@ namespace SemesterProject.App.Pages
                     context.SaveChanges();
                     Read();
 
-                    MessageBox.Show("Room update successfully.");
+                    MessageBox.Show("Room updated successfully.");
                 }
             }
         }
 
+        /// <summary>
+        /// Deletes the selected room from the database and updates the user interface.
+        /// </summary>
         public void Delete()
         {
             using (HotelDbContext context = new HotelDbContext())
@@ -162,12 +175,11 @@ namespace SemesterProject.App.Pages
                 }
                 else
                 {
-                    MessageBox.Show("Please select room.");
+                    MessageBox.Show("Please select a room.");
                     return;
                 }
             }
         }
-
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
@@ -189,9 +201,11 @@ namespace SemesterProject.App.Pages
         {
             Update();
         }
+
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             Delete();
         }
     }
 }
+
