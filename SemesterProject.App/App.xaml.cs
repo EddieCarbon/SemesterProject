@@ -1,5 +1,4 @@
-﻿using SemesterProject.Core;
-using SemesterProject.Database;
+﻿using SemesterProject.Database;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -23,6 +22,11 @@ namespace SemesterProject.App
             database.Database.EnsureCreated();
 
             DatabaseLocator.Database = database;
+        }
+
+        public class DatabaseLocator
+        {
+            public static HotelDbContext Database { get; set; }
         }
 
     }
