@@ -11,14 +11,17 @@ namespace SemesterProject.App.Pages
     /// </summary>
     public partial class HotelPage : Page
     {
-        
         public List<Hotel> HotelList { get; set; }
+
         public HotelPage()
         {
             InitializeComponent();
             Read();
         }
 
+        /// <summary>
+        /// Creates a new hotel based on the input from the user interface.
+        /// </summary>
         public void Create()
         {
             using (HotelDbContext context = new())
@@ -55,6 +58,9 @@ namespace SemesterProject.App.Pages
             }
         }
 
+        /// <summary>
+        /// Retrieves the list of hotels from the database and updates the user interface.
+        /// </summary>
         public void Read()
         {
             using (HotelDbContext context = new())
@@ -64,6 +70,9 @@ namespace SemesterProject.App.Pages
             }
         }
 
+        /// <summary>
+        /// Updates the selected hotel with the modified information from the user interface.
+        /// </summary>
         public void Update()
         {
             using (HotelDbContext context = new())
@@ -97,6 +106,9 @@ namespace SemesterProject.App.Pages
             }
         }
 
+        /// <summary>
+        /// Deletes the selected hotel from the database and updates the user interface.
+        /// </summary>
         public void Delete()
         {
             using (HotelDbContext context = new())
@@ -115,7 +127,7 @@ namespace SemesterProject.App.Pages
                     Read();
 
                     MessageBox.Show("Hotel deleted successfully.");
-                } 
+                }
             }
         }
 
